@@ -44,4 +44,4 @@ Populating the vault is engineered for speed. Use the pipe-delimited format in t
 
 **Clone the repository:**
    ```bash
-   git clone https://github.com/InsomniaSandy/lexicon-pro.git
+   git clone https://github.com/InsomniaSandy/american-lexicon.git
