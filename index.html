@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexicon Pro | Mastery</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="mesh-bg"></div>
+
+    <section id="gate" class="min-h-screen flex items-center justify-center p-6">
+        <div class="premium-card p-12 max-w-md w-full text-center">
+            <div class="logo-mark mx-auto mb-8 scale-150"></div>
+            <h1 class="text-4xl font-black tracking-tighter mb-4 italic text-[var(--text-main)]">LEXICON <span class="text-emerald-500">PRO</span></h1>
+            <p class="text-[var(--text-dim)] text-sm mb-10">Adaptive mastery vault.</p>
+            <button id="loginBtn" class="btn-auth">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/action/google.svg" class="w-6" alt="Google">
+                Continue with Google
+            </button>
+        </div>
+    </section>
+
+    <main id="app" class="hidden">
+        <nav class="sticky top-0 z-50 px-8 py-6 border-b border-[var(--glass-border)] bg-[var(--card-bg)] backdrop-blur-3xl">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <div class="logo-mark"></div>
+                    <span class="text-xl font-black italic tracking-tighter uppercase text-[var(--text-main)]">Lexicon<span class="text-emerald-500">.</span></span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="admin.html" id="adminBtn" class="hidden px-4 py-2 rounded-xl bg-emerald-500/10 text-emerald-500 text-[10px] font-black border border-emerald-500/20">ADMIN PANEL</a>
+                    <button id="logoutBtn" class="text-xs font-bold text-[var(--text-dim)] hover:text-red-500 transition-colors">Sign Out</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="max-w-7xl mx-auto px-8 mt-8 flex gap-8 border-b border-[var(--glass-border)]">
+            <button onclick="window.switchSection('General')" id="nav-General" class="pb-4 text-sm font-bold border-b-2 border-emerald-500 text-emerald-500 transition-all">GENERAL GALLERY</button>
+            <button onclick="window.switchSection('IELTS')" id="nav-IELTS" class="pb-4 text-sm font-bold border-b-2 border-transparent text-[var(--text-dim)] hover:text-[var(--text-main)] transition-all">IELTS VAULT</button>
+            <button onclick="window.switchSection('SAT')" id="nav-SAT" class="pb-4 text-sm font-bold border-b-2 border-transparent text-[var(--text-dim)] hover:text-[var(--text-main)] transition-all">SAT ELITE</button>
+        </div>
+
+        <section class="max-w-7xl mx-auto px-8 py-16">
+            <div class="mb-20">
+                <h2 id="sectionTitle" class="text-6xl font-black mb-10 tracking-tighter leading-tight text-[var(--text-main)]">Elite <br><span class="text-emerald-500">Linguistics.</span></h2>
+                
+                <div id="categoryFilters" class="flex flex-wrap gap-3 mb-10"></div>
+
+                <div class="relative max-w-2xl group">
+                    <input type="text" id="search" placeholder="Search phrase or definition..." class="w-full bg-[var(--input-bg)] border border-[var(--glass-border)] p-6 pl-16 rounded-3xl text-xl outline-none focus:border-emerald-500 transition-all text-[var(--text-main)] shadow-sm">
+                    <span class="absolute left-6 top-1/2 -translate-y-1/2 opacity-30 text-2xl">🔍</span>
+                </div>
+            </div>
+
+            <div id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
+        </section>
+
+        <footer class="mt-20 border-t border-[var(--glass-border)] bg-[var(--card-bg)] backdrop-blur-3xl py-20">
+            <div class="max-w-7xl mx-auto px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                    
+                    <div class="lg:col-span-5">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="logo-mark scale-90"></div>
+                            <span class="text-2xl font-black italic tracking-tighter uppercase text-[var(--text-main)]">ENDLESS<span class="text-emerald-500">.</span></span>
+                        </div>
+                        <p class="text-[var(--text-dim)] text-sm leading-relaxed max-w-sm mb-8 font-medium">
+                            An elite ecosystem dedicated to linguistic mastery and cognitive expansion. Engineered for those who seek precision in every syllable.
+                        </p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                            <span class="text-[10px] font-black text-emerald-500 uppercase tracking-[0.2em]">System Operational: v3.0.2</span>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-4 grid grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-[10px] font-black text-[var(--text-main)] uppercase tracking-[0.3em] mb-6">Network</h4>
+                            <ul class="space-y-4">
+                                <li>
+                                    <a href="https://t.me/code_essence" target="_blank" class="group flex flex-col">
+                                        <span class="text-[var(--text-dim)] text-[11px] group-hover:text-emerald-500 transition-colors">Telegram</span>
+                                        <span class="text-[var(--text-main)] font-bold tracking-tight">@code_essence</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://instagram.com/endless.hub" target="_blank" class="group flex flex-col">
+                                        <span class="text-[var(--text-dim)] text-[11px] group-hover:text-emerald-500 transition-colors">Instagram</span>
+                                        <span class="text-[var(--text-main)] font-bold tracking-tight">@endless.hub</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-[10px] font-black text-[var(--text-main)] uppercase tracking-[0.3em] mb-6">Mastery</h4>
+                            <ul class="space-y-4 text-[var(--text-dim)] text-[11px] font-bold">
+                                <li class="hover:text-emerald-500 cursor-pointer transition-colors">IELTS Elite</li>
+                                <li class="hover:text-emerald-500 cursor-pointer transition-colors">SAT Verbal</li>
+                                <li class="hover:text-emerald-500 cursor-pointer transition-colors">Lexicon Vault</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-3 flex flex-col justify-between items-end">
+                        <div class="text-right">
+                            <span class="block text-4xl font-black text-[var(--text-main)] opacity-5 italic tracking-tighter">LEXICON PRO</span>
+                            <span class="block text-[10px] font-black text-emerald-500/40 uppercase tracking-[0.5em] mt-2">EST. 2026</span>
+                        </div>
+                        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-4 rounded-2xl bg-emerald-500/5 border border-emerald-500/20 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all group">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-20 pt-8 border-t border-[var(--glass-border)] flex flex-col md:flex-row justify-between items-center gap-6">
+    <p class="text-[9px] font-black text-[var(--text-dim)] uppercase tracking-[0.4em]">
+        © 2026 <span class="text-[var(--text-main)]">Endless Group</span>. All rights reserved.
+    </p>
+    <div class="flex gap-8 text-[9px] font-black text-[var(--text-dim)] uppercase tracking-[0.2em]">
+        <a href="privacy.html" class="hover:text-emerald-500 transition-colors no-underline">Privacy Protocol</a>
+        <a href="terms.html" class="hover:text-emerald-500 transition-colors no-underline">Terms of Mastery</a>
+    </div>
+</div>
+            </div>
+        </footer>
+    </main>
+
+    <script type="module">
+        import { auth, provider, signInWithPopup, signOut, onAuthStateChanged, db, collection, onSnapshot, query, orderBy, setDoc, doc, ADMIN_EMAIL } from "./auth.js";
+
+        let allData = [];
+        let currentSection = 'General'; 
+        let currentCategory = 'All';
+
+        document.getElementById('loginBtn').onclick = () => signInWithPopup(auth, provider);
+        document.getElementById('logoutBtn').onclick = () => signOut(auth);
+
+        // --- SECTION LOGIC ---
+        window.switchSection = (section) => {
+            currentSection = section;
+            currentCategory = 'All';
+            
+            ['General', 'IELTS', 'SAT'].forEach(s => {
+                const el = document.getElementById(`nav-${s}`);
+                el.classList.toggle('border-emerald-500', s === section);
+                el.classList.toggle('text-emerald-500', s === section);
+                el.classList.toggle('border-transparent', s !== section);
+                el.classList.toggle('text-[var(--text-dim)]', s !== section);
+            });
+
+            const titles = {
+                'General': 'Elite <br><span class="text-emerald-500">Linguistics.</span>',
+                'IELTS': 'IELTS <br><span class="text-emerald-500">Academic Task.</span>',
+                'SAT': 'SAT <br><span class="text-emerald-500">Verbal Mastery.</span>'
+            };
+            document.getElementById('sectionTitle').innerHTML = titles[section];
+
+            renderCategories();
+            render();
+        };
+
+        window.filterCat = (cat) => {
+            currentCategory = cat;
+            renderCategories();
+            render();
+        };
+
+        function renderCategories() {
+            const filterContainer = document.getElementById('categoryFilters');
+            const sectionData = allData.filter(i => (i.section || 'General') === currentSection);
+            const types = ['All', ...new Set(sectionData.map(item => item.type).filter(Boolean))];
+            
+            filterContainer.innerHTML = types.map(type => `
+                <button onclick="window.filterCat('${type}')" class="cat-chip ${currentCategory === type ? 'active' : ''}">
+                    ${type === 'All' ? 'View All' : type}
+                </button>
+            `).join('');
+        }
+
+        function render() {
+            const term = document.getElementById('search').value.toLowerCase();
+            
+            const filtered = allData.filter(i => {
+                const itemSection = i.section || 'General';
+                const matchesSection = itemSection === currentSection;
+                const matchesCat = currentCategory === 'All' || i.type === currentCategory;
+                const matchesSearch = i.phrase.toLowerCase().includes(term) || i.definition.toLowerCase().includes(term);
+                
+                return matchesSection && matchesCat && matchesSearch;
+            });
+
+            document.getElementById('grid').innerHTML = filtered.map((i, idx) => `
+                <div class="premium-card p-10 animate-card" style="animation-delay: ${idx * 0.05}s">
+                    <span class="px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-500 text-[9px] font-black uppercase tracking-widest border border-emerald-500/20">${i.type}</span>
+                    <h3 class="text-3xl font-bold mt-6 mb-4 tracking-tight text-[var(--text-main)]">${i.phrase}</h3>
+                    <p class="text-[var(--text-dim)] text-sm mb-8 font-medium leading-relaxed">${i.definition}</p>
+                    <div class="p-5 bg-slate-500/5 rounded-2xl border-l-2 border-emerald-500 italic text-[11px] text-[var(--text-dim)]">"${i.example}"</div>
+                </div>
+            `).join('');
+        }
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                document.getElementById('gate').classList.add('hidden');
+                document.getElementById('app').classList.remove('hidden');
+                
+                await setDoc(doc(db, "users", user.uid), {
+                    name: user.displayName, email: user.email,
+                    role: user.email === ADMIN_EMAIL ? "admin" : "user"
+                }, { merge: true });
+
+                if (user.email === ADMIN_EMAIL) document.getElementById('adminBtn').classList.remove('hidden');
+
+                onSnapshot(query(collection(db, "phrases"), orderBy("phrase")), (snap) => {
+                    allData = snap.docs.map(d => d.data());
+                    renderCategories();
+                    render();
+                });
+                document.getElementById('search').oninput = render;
+            } else {
+                document.getElementById('gate').classList.remove('hidden');
+                document.getElementById('app').classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

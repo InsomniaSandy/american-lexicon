@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Admin | Lexicon</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-6 md:p-12">
+    <div class="mesh-bg"></div>
+    <div class="max-w-7xl mx-auto">
+        <header class="flex justify-between items-center mb-20">
+            <h1 class="text-4xl font-black tracking-tighter uppercase italic text-[var(--text-main)]">Control <span class="text-emerald-500">Room</span></h1>
+            <div class="flex gap-4">
+                <a href="index.html" class="px-6 py-3 rounded-2xl bg-[var(--card-bg)] border border-[var(--glass-border)] font-bold text-xs text-[var(--text-main)]">Gallery</a>
+                <button id="adminLogout" class="px-6 py-3 rounded-2xl bg-red-500 text-white font-black text-xs uppercase">Sign Out</button>
+            </div>
+        </header>
+
+        <div class="grid lg:grid-cols-2 gap-12">
+            <section class="premium-card p-12">
+                <h2 class="text-xl font-black mb-8 italic text-[var(--text-main)]">BATCH PROCESSOR</h2>
+                <textarea id="bulkInput" placeholder="Phrase | Definition | Example | Type" class="w-full h-80 bg-[var(--input-bg)] border border-[var(--glass-border)] rounded-3xl p-6 mb-6 text-[var(--text-main)] outline-none focus:border-emerald-500 transition-all"></textarea>
+                <button id="bulkBtn" class="w-full bg-emerald-500 text-white font-black py-5 rounded-3xl text-lg shadow-lg">SYNC CLOUD</button>
+            </section>
+
+            <section class="premium-card p-12">
+                <h2 class="text-xl font-black mb-8 italic text-[var(--text-main)]">COMMUNITY</h2>
+                <div id="userList" class="space-y-4"></div>
+            </section>
+        </div>
+    </div>
+
+    <script type="module">
+        import { auth, db, ADMIN_EMAIL, onAuthStateChanged, collection, addDoc, query, where, getDocs, updateDoc, doc, onSnapshot, signOut } from "./auth.js";
+        document.getElementById('adminLogout').onclick = () => signOut(auth);
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user || user.email !== ADMIN_EMAIL) window.location.href = "index.html";
+            onSnapshot(collection(db, "users"), (snap) => {
+                document.getElementById('userList').innerHTML = snap.docs.map(d => {
+                    const u = d.data();
+                    return `
+                        <div class="flex justify-between items-center p-5 bg-slate-500/5 rounded-3xl border border-[var(--glass-border)]">
+                            <div><p class="font-black text-sm text-[var(--text-main)]">${u.name}</p><p class="text-[10px] text-[var(--text-dim)]">${u.email}</p></div>
+                            <button onclick="window.toggleRole('${d.id}', '${u.role}')" class="px-4 py-2 rounded-xl text-[10px] font-black ${u.role==='admin'?'bg-emerald-500 text-white':'bg-slate-500/20 text-[var(--text-dim)]'} uppercase">${u.role}</button>
+                        </div>
+                    `;
+                }).join('');
+            });
+        });
+
+        window.toggleRole = async (uid, role) => {
+            await updateDoc(doc(db, "users", uid), { role: role === 'admin' ? 'user' : 'admin' });
+        };
+
+        document.getElementById('bulkBtn').onclick = async () => {
+    const btn = document.getElementById('bulkBtn');
+    const lines = document.getElementById('bulkInput').value.split('\n').filter(l => l.trim());
+    btn.disabled = true; btn.innerText = "SYNCING...";
+    for (let line of lines) {
+        // Split into 5 parts now
+        const [p, d, e, t, s] = line.split('|').map(x => x.trim());
+        if (p && d) {
+            const q = await getDocs(query(collection(db, "phrases"), where("phrase", "==", p)));
+            if (q.empty) {
+                await addDoc(collection(db, "phrases"), { 
+                    phrase: p, 
+                    definition: d, 
+                    example: e || "", 
+                    type: t || "General",
+                    section: s || "General" // If empty, it goes to General Gallery
+                });
+            }
+        }
+    }
+    btn.disabled = false; btn.innerText = "SYNC COMPLETE";
+    setTimeout(() => btn.innerText = "SYNC CLOUD", 3000);
+};
+    </script>
+</body>
+</html>
